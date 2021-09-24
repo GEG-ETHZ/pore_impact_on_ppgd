@@ -12,19 +12,17 @@ This electrostatic model calculates the electric field distribution across the g
 2. Clone the repository in the ~/projects directory (this directory is defined in [MOOSE installation](https://mooseframework.inl.gov/getting_started/installation/index.html)).
 3. For the sample-scale simulations:
   '''
-  cd ~/projects/pore_impact_on_ppgd/simulation_files/sample-scale/
-  ../../moose/test/moose_test-opt -i simulation_file_name.i
-  example: ../../moose/test/moose_test-opt -i laplace_rock_top.i
+  * ` cd ~/projects/pore_impact_on_ppgd/simulation_files/sample-scale/`
+  * ` ../../moose/test/moose_test-opt -i simulation_file_name.i`
+  * example: `../../moose/test/moose_test-opt -i laplace_rock_top.i`
   '''
 4. For the pore-scale simulations:
-   * 'cd ~/projects/pore_impact_on_ppgd/simulation_files/pore-scale/'
-   * '../../moose/test/moose_test-opt -i simulation_file_name.i'
-   * example: '../../moose/test/moose_test-opt -i laplace_water_ellipse_x_p01.i'
+   * ` cd ~/projects/pore_impact_on_ppgd/simulation_files/pore-scale/`
+   * `../../moose/test/moose_test-opt -i simulation_file_name.i`
+   * example: `../../moose/test/moose_test-opt -i laplace_water_ellipse_x_p01.i`
   '''
 5. To plot all figures, please consult the data_processing directory
-'''
-cd ~/projects/pore_impact_on_ppgd/data_processing
-'''
+   * `cd ~/projects/pore_impact_on_ppgd/data_processing`
 
 #### Publications:
 - Ezzat, M., Vogler, D., Saar, M. O. & Adams, B. M. Numerical Modelling of Pore Characteristics in Plasma Pulse Geo Drilling (PPGD). (In prep. 2021).
