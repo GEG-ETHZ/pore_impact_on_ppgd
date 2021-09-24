@@ -23,7 +23,7 @@ This electrostatic model calculates the electric field distribution across the g
    * `cd ~/projects/pore_impact_on_ppgd/data_processing`
 
 #### Project:
-This work comes is a part of the [Plasma Pulse Geo Drilling](https://geg.ethz.ch/project-plasma_drilling/) project, Geothermal Energy and Geofluids ([GEG.ethz.ch](https://geg.ethz.ch/)) group at ETH Zurich (ETHZ), Switzerland.
+This work is a part of the [Plasma Pulse Geo Drilling](https://geg.ethz.ch/project-plasma_drilling/) project, Geothermal Energy and Geofluids ([GEG.ethz.ch](https://geg.ethz.ch/)) group at ETH Zurich (ETHZ), Switzerland.
 
 #### Publications:
 - Ezzat, M., Vogler, D., Saar, M. O. & Adams, B. M. Numerical Modelling of Pore Characteristics in Plasma Pulse Geo Drilling (PPGD). (In prep. 2021).
