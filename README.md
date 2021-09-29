@@ -13,12 +13,12 @@ This electrostatic model calculates the electric field distribution across the g
    * `git clone https://github.com/mezzatf/pore_impact_on_ppgd.git`
 3. For the sample-scale simulations:
    * `cd ~/projects/pore_impact_on_ppgd/simulation_files/sample-scale/`
-   * `../../moose/test/moose_test-opt -i simulation_file_name.i`
-   * example: `../../moose/test/moose_test-opt -i laplace_rock_top.i`
+   * `../../../moose/test/moose_test-opt -i simulation_file_name.i`
+   * example: `../../../moose/test/moose_test-opt -i laplace_rock_top.i`
 4. For the pore-scale simulations:
    * `cd ~/projects/pore_impact_on_ppgd/simulation_files/pore-scale/`
-   * `../../moose/test/moose_test-opt -i simulation_file_name.i`
-   * example: `../../moose/test/moose_test-opt -i laplace_water_ellipse_x_p01.i`
+   * `../../../moose/test/moose_test-opt -i simulation_file_name.i`
+   * example: `../../../moose/test/moose_test-opt -i laplace_water_ellipse_x_p01.i`
 5. To plot all figures, please consult the data_processing directory
    * `cd ~/projects/pore_impact_on_ppgd/data_processing`
 
