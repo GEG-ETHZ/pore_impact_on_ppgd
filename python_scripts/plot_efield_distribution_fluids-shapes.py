@@ -7,7 +7,7 @@ from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 import matplotlib
 from mpl_toolkits.axisartist.axislines import SubplotZero
-
+import os
 
 
 
@@ -45,7 +45,7 @@ for f, fluid in enumerate(fluids):
             file  = 'laplace_air_%s_p01_out.e'%(shape)
         else:
             file  = 'laplace_%s_%s_p01_out.e'%(fluid, shape)
-        data  = ns(WD+'simulating_pore_impact/simulation_files/pore-scale/'+file)
+        data  = ns(WD+'pore_impact_on_ppgd/simulation_files/pore-scale/'+file)
         # GET THE X-Coord of nodes
         X = data.variables["coordx"]
         X.set_auto_mask(False)
@@ -234,7 +234,7 @@ cb.ax.tick_params(labelsize=fs)
 plt.rcParams["mathtext.fontset"] = "cm"
 plt.rcParams["text.usetex"] =True
 
-plt.savefig(WD+'simulating_pore_impact/figures/pore_efield_shape_fluid.png')
-plt.savefig(WD+'simulating_pore_impact/figures/pore_efield_shape_fluid.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/pore_efield_shape_fluid.png')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/pore_efield_shape_fluid.eps')
 
 plt.show()

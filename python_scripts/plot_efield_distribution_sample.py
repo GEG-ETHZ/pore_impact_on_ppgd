@@ -3,10 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from matplotlib.patches import Rectangle
+import os
 
 gs  = gridspec.GridSpec(1,1)
 fig = plt.figure(figsize=(13,3))
 fs = 18
+fsIns = fs - 6
 plt.rcParams["mathtext.fontset"] = "cm"
 plt.rcParams["text.usetex"] =True
 
@@ -14,7 +16,7 @@ plt.rcParams["text.usetex"] =True
 # Usually is the project directory
 WD    = os.path.expanduser('~/projects/')
 
-data  = ns(WD+'simulating_pore_impact/simulation_files/sample-scale/laplace_rock_top_out.e')
+data  = ns(WD+'pore_impact_on_ppgd/simulation_files/sample-scale/laplace_rock_top_out.e')
 
 # GET THE X-Coord of nodes
 X = data.variables["coordx"]
@@ -120,12 +122,12 @@ ax1.tick_params(axis='y', which='both', left=False, right=False, labelsize=fs)
 ax1.annotate("", xy=(-0.004, -0.15), xycoords='axes fraction',  xytext=(1.005, -0.15),  arrowprops=dict(arrowstyle='<->'))
 ax1.annotate("", xy=(-0.004, -0.15), xycoords='axes fraction',  xytext=(1.005, -0.15),  arrowprops=dict(arrowstyle='|-|'))
 bbox=dict(fc="white", ec="none")
-ax1.text(6.5, -0.4, "$W_S=\mathrm{13~cm}$", ha="center", va="center", bbox=bbox, fontsize=fsIns)
+ax1.text(6.5, -0.4, "$W_S=\mathrm{13~cm}$", ha="center", va="center", bbox=bbox, fontsize=fs)
 
 ax1.annotate("", xy=(0.5, 0), xycoords='axes fraction',  xytext=(0.5, 1),   arrowprops=dict(arrowstyle='<->', color="white"))
 # ax1.annotate("", xy=(0.5, 0), xycoords='axes fraction',  xytext=(0.5, 1),  arrowprops=dict(arrowstyle='|-|'))
 bbox=dict(fc="white", ec="none", alpha=0)
-ax1.text(6.2, 1.5, "$H_S=\mathrm{3~cm}$", ha="center", va="center", bbox=bbox, fontsize=fsIns, color="white", rotation=90)
+ax1.text(6.2, 1.5, "$H_S=\mathrm{3~cm}$", ha="center", va="center", bbox=bbox, fontsize=fs, color="white", rotation=90)
 
 
 
@@ -177,7 +179,7 @@ ax1.add_patch(Rectangle((3.3, 1.4), 6.6, 1.6, ls="--", color="white", alpha=1, f
 plt.tight_layout()
 
 # Save the figures
-plt.savefig(WD+'simulating_pore_impact/figures/sample_efield.png')
-plt.savefig(WD+'simulating_pore_impact/figures/sample_efield.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.png')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.eps')
 
 plt.show()

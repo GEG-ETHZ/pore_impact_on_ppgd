@@ -15,7 +15,7 @@ plt.rcParams["text.usetex"] =True
 # Usually is the project directory
 WD    = os.path.expanduser('~/projects/')
 
-data  = ns(WD+'simulating_pore_impact/simulation_files/sample-scale/laplace_rock_top_out.e')
+data  = ns(WD+'pore_impact_on_ppgd/simulation_files/sample-scale/laplace_rock_top_out.e')
 
 # GET THE X-Coord of nodes
 X = data.variables["coordx"]
@@ -150,8 +150,8 @@ ax1.set_xticklabels('')
 ax1.set_yticklabels('')
 plt.tight_layout()
 
-plt.savefig(WD+'simulating_pore_impact/figures/model_schematic_sample.png')
-plt.savefig(WD+'simulating_pore_impact/figures/model_schematic_sample.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/model_schematic_sample.png')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/model_schematic_sample.eps')
 
 
 plt.show()

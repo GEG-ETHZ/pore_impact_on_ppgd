@@ -6,11 +6,13 @@ import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy import ndimage
+import os 
 
 WD    = os.path.expanduser('~/projects/')
 
+# Choose the x-axis variable, the pore pressure or the pore size
 variable = "pressure" # X-Axis
-# variable = "size"     # X-Axis
+variable = "size"     # X-Axis
 
 # Figure dimensions
 gs  = gridspec.GridSpec(1,1)
@@ -95,6 +97,6 @@ plt.rcParams["text.usetex"]      = True
 ax.grid()
 plt.legend(loc=0, numpoints = 1, prop={"size":fs-6})
 plt.tight_layout()
-plt.savefig(WD+'simulating_pore_impact/figures/AirDielectricStrength_vs_Pore%s.png'%(variable.title()))
-plt.savefig(WD+'simulating_pore_impact/figures/AirDielectricStrength_vs_Pore%s.eps'%(variable.title()))
+plt.savefig(WD+'pore_impact_on_ppgd/figures/AirDielectricStrength_vs_Pore%s.png'%(variable.title()))
+plt.savefig(WD+'pore_impact_on_ppgd/figures/AirDielectricStrength_vs_Pore%s.eps'%(variable.title()))
 plt.show()

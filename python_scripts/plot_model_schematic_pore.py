@@ -7,6 +7,8 @@ import matplotlib.gridspec as gridspec
 from matplotlib.patches import Rectangle, Ellipse
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
+import os
+
 
 gs  = gridspec.GridSpec(1,1)
 fig = plt.figure(figsize=(6,3))
@@ -20,7 +22,7 @@ plt.rcParams["text.usetex"] =True
 WD    = os.path.expanduser('~/projects/')
 
 
-data  = ns(WD+'simulating_pore_impact/simulation_files/pore-scale/laplace_air_ellipse_p01_out.e')
+data  = ns(WD+'pore_impact_on_ppgd/simulation_files/pore-scale/laplace_air_ellipse_p01_out.e')
 
 # GET THE X-Coord of nodes
 X = data.variables["coordx"]
@@ -192,6 +194,6 @@ ax1.text(1.15 , 0.22, "$y$", ha="center", va="center", bbox=bbox, fontsize=fsIns
 
 plt.tight_layout()
 
-plt.savefig(WD+'simulating_pore_impact/figures/model_schematic_pore.png')
-plt.savefig(WD+'simulating_pore_impact/figures/model_schematic_pore.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/model_schematic_pore.png')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/model_schematic_pore.eps')
 plt.show()

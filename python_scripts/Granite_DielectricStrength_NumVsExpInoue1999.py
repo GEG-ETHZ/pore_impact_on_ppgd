@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy import ndimage
 import math
-
+import os
 WD    = os.path.expanduser('~/projects/')
 
 
@@ -57,7 +57,7 @@ for nv, v in enumerate(ElectrodeVoltage):
 xmin = np.array([0,500/(47)])
 ymin = np.array([0,500])
 ymin = ((ymin[1]-ymin[0])/(xmin[1]-xmin[0])) * xmin
-damagezone = plt.fill_between(xmin,ymin,0,  facecolor='grey', alpha=0.5, label="$\\mathrm{No-Damage~Zone}$")
+nodamagezone = plt.fill_between(xmin,ymin,0,  facecolor='grey', alpha=0.5, label="$\\mathrm{No-Damage~Zone}$")
 
 DS_Min  = r"$E_{DS,Exp,Min}$"
 DS_Min += " "
@@ -68,7 +68,7 @@ dsmin = plt.plot(xmin,ymin,  ":",  lw=lws, color="black",  label=DS_Min)
 xmax = np.array([0,500/(58)])
 ymax = np.array([0,500])
 ymax = ((ymax[1]-ymax[0])/(xmax[1]-xmax[0])) * xmax
-nodamagezone = plt.fill_between(xmax,ymax,500,  facecolor='lightsteelblue', alpha=0.5, label="$\\mathrm{Damage~Zone}$")
+damagezone = plt.fill_between(xmax,ymax,500,  facecolor='lightsteelblue', alpha=0.5, label="$\\mathrm{Damage~Zone}$")
 
 DS_Max  = r"$E_{DS,Exp,Max}$"
 DS_Max += " "
@@ -114,7 +114,7 @@ loc=8, numpoints = 1, prop={"size":fs-8})
 # plt.legend(numpoints = 1, prop={"size":fs-6})
 plt.grid(color="gray")
 plt.tight_layout()
-plt.savefig(WD+'simulating_pore_impact/figures/Granite_DielectricStrength_NumVsExpInoue1999.png')
-plt.savefig(WD+'simulating_pore_impact/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.png')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
 
 plt.show()
