@@ -69,11 +69,15 @@ for f, fluid in enumerate(fluids):
             if point_data_names[i] == "EField_x":
                EField_x = data.variables["vals_nod_var%s"%(i+1)]
                EField_x.set_auto_mask(False)
-               EField_x = EField_x [:][1]
+               # This minus (-) sign to adapt the positive gradient calcluated by MOOSE as standard.
+               # However, the electric field defintion is - grad (V).
+               EField_x = -1*EField_x [:][1]
             if point_data_names[i] == "EField_y":
                EField_y = data.variables["vals_nod_var%s"%(i+1)]
                EField_y.set_auto_mask(False)
-               EField_y = EField_y [:][1]
+               # This minus (-) sign to adapt the positive gradient calcluated by MOOSE as standard.
+               # However, the electric field defintion is - grad (V).
+               EField_y = -1*EField_y [:][1]
             if point_data_names[i] == "voltage":
                voltage = data.variables["vals_nod_var%s"%(i+1)]
                voltage.set_auto_mask(False)

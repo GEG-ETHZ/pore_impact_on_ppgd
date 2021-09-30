@@ -85,7 +85,7 @@
   [voltage_pulse]
     type  = ParsedFunction
     # value = '3e5*(tanh(t*9e6)-sin(2.0*pi*t/(8.0*1e-6)))/0.8'
-    value = 3*1e5
+    value = 3.8*1e5
   []
 []
 

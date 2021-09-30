@@ -44,11 +44,15 @@ for i in np.arange(len(point_data_names)):
     if point_data_names[i] == "EField_x":
        EField_x = data.variables["vals_nod_var%s"%(i+1)]
        EField_x.set_auto_mask(False)
-       EField_x = EField_x [:]
+       # This minus (-) sign to adapt the positive gradient calcluated by MOOSE as standard.
+       # However, the electric field defintion is - grad (V).
+       EField_x = -1*EField_x [:]
     if point_data_names[i] == "EField_y":
        EField_y = data.variables["vals_nod_var%s"%(i+1)]
        EField_y.set_auto_mask(False)
-       EField_y = EField_y [:]
+       # This minus (-) sign to adapt the positive gradient calcluated by MOOSE as standard.
+       # However, the electric field defintion is - grad (V).
+       EField_y = -1*EField_y [:]
     if point_data_names[i] == "charge_density":
        charge_density = data.variables["vals_nod_var%s"%(i+1)]
        charge_density.set_auto_mask(False)
@@ -67,17 +71,13 @@ for i in np.arange(len(element_data_names)):
        # electric_permittivity_pore.set_auto_mask(False)
        # electric_permittivity_pore = electric_permittivity_pore [:]
 
-Voltage        = 300.0 #kV
+Voltage        = 380.0 #kV
 Electrode_gap  = 5.0 #cm
-EField_Applied = (300.0/5.0) * 1e-1 #MV/m
+EField_Applied = (Voltage/Electrode_gap) * 1e-1 #MV/m
 
 
 EField_x = EField_x[1] * 1e-6 / EField_Applied #V/m to MV/m and Normalized
 EField_y = EField_y[1] * 1e-6 / EField_Applied #V/m to MV/m and Normalized
-voltage  = voltage[1]  * 1e-3 #V to kV
-
-
-
 
 EField = np.sqrt(EField_x**2 + EField_y ** 2)
 
