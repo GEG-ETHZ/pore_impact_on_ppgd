@@ -6,10 +6,28 @@ import math
 import os
 WD    = os.path.expanduser('~/projects/')
 
+#LINE STYLES
+# linestyle_tuple = [
+#      ('loosely dotted',        (0, (1, 10))),
+#      ('dotted',                (0, (1, 1))),
+#      ('densely dotted',        (0, (1, 1))),
+#
+#      ('loosely dashed',        (0, (5, 10))),
+#      ('dashed',                (0, (5, 5))),
+#      ('densely dashed',        (0, (5, 1))),
+#
+#      ('loosely dashdotted',    (0, (3, 10, 1, 10))),
+#      ('dashdotted',            (0, (3, 5, 1, 5))),
+#      ('densely dashdotted',    (0, (3, 1, 1, 1))),
+#
+#      ('dashdotdotted',         (0, (3, 5, 1, 5, 1, 5))),
+#      ('loosely dashdotdotted', (0, (3, 10, 1, 10, 1, 10))),
+#      ('densely dashdotdotted', (0, (3, 1, 1, 1, 1, 1)))]
+
 
 # Figure dimensions
 gs  = gridspec.GridSpec(1,1)
-fig = plt.figure(figsize=(9,6))
+fig = plt.figure(figsize=(12,6))
 ax  = plt.subplot(gs[0,0])
 
 # Font sizes and line styles
@@ -50,6 +68,8 @@ for nv, v in enumerate(ElectrodeVoltage):
                damagepoint=plt.plot(g, v, "o", markersize=ms,  color=color, label="$\\mathrm{Damage_{Exp}}$")
             else:
                ax.plot(g, v, "o", markersize=ms, color=color)
+               # ax.plot(g, v, "o", markersize=ms-3, color='white')
+
             damageEvents += 1
 
 
@@ -77,18 +97,52 @@ dsmax = plt.plot(xmax,ymax,  "--",  lw=lws, color="black",label=DS_Max)
 
 
 # The numerical dielectric strength calculated by our model
-x = np.array([0,500/(128.0/2.5)])
-# 128 kV/cm is the required electric field to induce electric breakdown in 50 um pore under 0.1 MPa pressure
-# 2.5  is the enhancement factor (2 the average of sample scale) * (1.25 the average of the pore scale)
+# 550 kV/cm is the required electric field to induce electric breakdown in 10 um pore under 0.1 MPa pressure
+# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
+numDS10 = 550.0/10
+xmid10     = np.array([0,500/numDS10])
+ymid10     = np.array([0,500])
+ymid10 = ((ymid10[1]-ymid10[0])/(xmid10[1]-xmid10[0])) * xmid10
 
-y = np.array([0,500])
-y = ((y[1]-y[0])/(x[1]-x[0])) * x
+
+DS_Num10  = r"$E_{DS,Num,10\mu m}$"
+DS_Num10 += " "
+DS_Num10 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS10
+dsnum10 = ax.plot(xmid10,ymid10, lw=lws, color="blue",  label=numDS10)
+ax.text(7.7,400, '$d_P=10\\mathrm{\mu m}$', fontsize=fs-5, rotation=42)
 
 
-DS_Num  = r"$E_{DS,Num}$"
-DS_Num += " "
-DS_Num += r"$\mathrm{=}~%s~\mathrm{kV/cm}$"%51
-dsnum = ax.plot(x,y,  lw=lws, color="black",  label=DS_Num)
+# The numerical dielectric strength calculated by our model
+# 130 kV/cm is the required electric field to induce electric breakdown in 50 um pore under 0.1 MPa pressure
+# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
+numDS50 = 130/10
+xmid50     = np.array([0,500/numDS50])
+ymid50 = np.array([0,500])
+ymid50 = ((ymid50[1]-ymid50[0])/(xmid50[1]-xmid50[0])) * xmid50
+
+
+DS_Num50  = r"$E_{DS,Num,50\mu m}$"
+DS_Num50 += " "
+DS_Num50 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS50
+dsnum50 = ax.plot(xmid50,ymid50, lw=lws, color="green",  label=numDS50)
+ax.text(7,100, '$d_P=50\\mathrm{\mu m}$', fontsize=fs-5, rotation=10)
+
+
+# The numerical dielectric strength calculated by our model
+# 550 kV/cm is the required electric field to induce electric breakdown in 100 um pore under 0.1 MPa pressure
+# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
+numDS100 = 97/10
+xmid100     = np.array([0,500/numDS100])
+ymid100 = np.array([0,500])
+ymid100 = ((ymid100[1]-ymid100[0])/(xmid100[1]-xmid100[0])) * xmid100
+
+
+DS_Num100  = r"$E_{DS,Num,100\mu m}$"
+DS_Num100 += " "
+DS_Num100 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS100
+dsnum100 = ax.plot(xmid100,ymid100, lw=lws, color="red",  label=numDS100)
+ax.text(8.4,87, '$d_P=100\\mathrm{\mu m}$', fontsize=fs-5, rotation=10)
+
 
 
 ax.set_xlim(0,10.6)
@@ -104,12 +158,15 @@ plt.rcParams["text.usetex"]      = True
 
 legenddata = plt.legend(
 (damagepoint[0],damagezone,nodamagepoint[0],nodamagezone),
-['Damage (Exp.)','Damage Zone','No Damage (Exp.)','No Damage Zone'],
-loc=4, numpoints = 1, prop={"size":fs-10}
+['$\\mathrm{Damage\;(Exp.)}$', '$\\mathrm{Damage\;Zone}$', '$\\mathrm{No\;Damage\;(Exp.)}$','$\\mathrm{No\;Damage\;Zone}$'],
+bbox_to_anchor=(1.04,1), loc="upper left", numpoints = 1, prop={"size":fs-10}
 )
 plt.gca().add_artist(legenddata)
-plt.legend((dsmax[0],dsmin[0],dsnum[0]),[DS_Max,DS_Min,DS_Num],
-loc=8, numpoints = 1, prop={"size":fs-8})
+plt.legend((dsmax[0],dsmin[0],dsnum10[0],dsnum50[0],dsnum100[0]),[DS_Max,DS_Min,DS_Num10,DS_Num50,DS_Num100],
+bbox_to_anchor=(1.04,0), loc="lower left", numpoints = 1, prop={"size":fs-8})
+
+
+
 
 # plt.legend(numpoints = 1, prop={"size":fs-6})
 plt.grid(color="gray")
