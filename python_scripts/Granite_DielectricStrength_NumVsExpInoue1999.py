@@ -98,8 +98,14 @@ dsmax = plt.plot(xmax,ymax,  "--",  lw=lws, color="black",label=DS_Max)
 
 # The numerical dielectric strength calculated by our model
 # 550 kV/cm is the required electric field to induce electric breakdown in 10 um pore under 0.1 MPa pressure
-# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
-numDS10 = 550.0/10
+
+E_EF_Av = 4.5 * 1.75 #The total of the average enhacement factors
+# 4.5 is the average at the electrodes from sample simulation.
+# calculated from plot_efield_distribution_sample.py
+# 1.75 is the average of all pore shapes for air fluid
+# calculated from plot_efield_distribution_fluids-shapes.py
+
+numDS10 = 550.0/E_EF_Av
 xmid10     = np.array([0,500/numDS10])
 ymid10     = np.array([0,500])
 ymid10 = ((ymid10[1]-ymid10[0])/(xmid10[1]-xmid10[0])) * xmid10
@@ -109,13 +115,12 @@ DS_Num10  = r"$E_{DS,Num,10\mu m}$"
 DS_Num10 += " "
 DS_Num10 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS10
 dsnum10 = ax.plot(xmid10,ymid10, lw=lws, color="blue",  label=numDS10)
-ax.text(7.7,400, '$d_P=10\\mathrm{\mu m}$', fontsize=fs-5, rotation=42)
+ax.text(5.3,400, '$d_P=10\\mathrm{\mu m}$', fontsize=fs-5, rotation=47)
 
 
 # The numerical dielectric strength calculated by our model
 # 130 kV/cm is the required electric field to induce electric breakdown in 50 um pore under 0.1 MPa pressure
-# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
-numDS50 = 130/10
+numDS50 = 130/E_EF_Av
 xmid50     = np.array([0,500/numDS50])
 ymid50 = np.array([0,500])
 ymid50 = ((ymid50[1]-ymid50[0])/(xmid50[1]-xmid50[0])) * xmid50
@@ -125,13 +130,12 @@ DS_Num50  = r"$E_{DS,Num,50\mu m}$"
 DS_Num50 += " "
 DS_Num50 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS50
 dsnum50 = ax.plot(xmid50,ymid50, lw=lws, color="green",  label=numDS50)
-ax.text(7,100, '$d_P=50\\mathrm{\mu m}$', fontsize=fs-5, rotation=10)
+ax.text(7,125, '$d_P=50\\mathrm{\mu m}$', fontsize=fs-5, rotation=14)
 
 
 # The numerical dielectric strength calculated by our model
 # 550 kV/cm is the required electric field to induce electric breakdown in 100 um pore under 0.1 MPa pressure
-# 10  is the enhancement factor (2 the average of pore scale) * (5 the average of the sample scale)
-numDS100 = 97/10
+numDS100 = 97/E_EF_Av
 xmid100     = np.array([0,500/numDS100])
 ymid100 = np.array([0,500])
 ymid100 = ((ymid100[1]-ymid100[0])/(xmid100[1]-xmid100[0])) * xmid100
@@ -141,7 +145,7 @@ DS_Num100  = r"$E_{DS,Num,100\mu m}$"
 DS_Num100 += " "
 DS_Num100 += r"$\mathrm{=}~%2.0f~\mathrm{kV/cm}$"%numDS100
 dsnum100 = ax.plot(xmid100,ymid100, lw=lws, color="red",  label=numDS100)
-ax.text(8.4,87, '$d_P=100\\mathrm{\mu m}$', fontsize=fs-5, rotation=10)
+ax.text(8.4,112, '$d_P=100\\mathrm{\mu m}$', fontsize=fs-5, rotation=10)
 
 
 
@@ -172,6 +176,6 @@ bbox_to_anchor=(1.04,0), loc="lower left", numpoints = 1, prop={"size":fs-8})
 plt.grid(color="gray")
 plt.tight_layout()
 plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.png')
-plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
+# plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
 
 plt.show()

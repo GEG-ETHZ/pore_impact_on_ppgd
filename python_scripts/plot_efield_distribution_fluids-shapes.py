@@ -54,9 +54,7 @@ for f, fluid in enumerate(fluids):
         Y = data.variables["coordy"]
         Y.set_auto_mask(False)
         Y = Y [:]
-
         print(f,n)
-
 
 
         # GET THE NAMES OF THE NODE VARIABLES
@@ -122,20 +120,23 @@ for f, fluid in enumerate(fluids):
             LE = 0
             HE = 2.5
 
-
             LevelsE = np.linspace(LE, HE, 200)
             labelsE = np.arange(LE,HE+0.5,0.5)
-            locE    =  labelsE
-            CS  = plt.tricontourf(X,Y,EField, levels=LevelsE, cmap="jet")
-            # cb  = plt.colorbar(CS)
-            # cb.set_ticks(locE)
-            # cb.set_ticklabels(labelsE)
-            # cb.ax.tick_params(labelsize=fs)
-            # plt.rcParams["mathtext.fontset"] = "cm"
-            # plt.rcParams["text.usetex"] =True
-
-
-
+            locE = labelsE
+            CS = plt.tricontourf(X,Y,EField, levels=LevelsE, cmap="jet")
+            connect2 = data.variables['connect2']
+            ExEy = np.array([EField_x[:], EField_y[:]]).T
+            EFieldPore = []
+            print(ExEy[connect2[:]-1])
+            for ExEyPore in ExEy[connect2[:]-1]:
+                    EFieldPoreNode1 = np.sqrt(ExEyPore[0][0]**2 + ExEyPore[0][1]**2)
+                    EFieldPoreNode2 = np.sqrt(ExEyPore[1][0]**2 + ExEyPore[1][1]**2)
+                    EFieldPoreNode3 = np.sqrt(ExEyPore[2][0]**2 + ExEyPore[2][1]**2)
+                    print(EFieldPoreNode1,EFieldPoreNode2,EFieldPoreNode3)
+                    MeanEFieldPoreNode = np.mean(np.array([EFieldPoreNode1,EFieldPoreNode2,EFieldPoreNode3]))
+                    EFieldPore.append(MeanEFieldPoreNode)
+            EFFieldPoreMean = np.mean(np.array(EFieldPore))
+            ax.text(0.5, 0.7, "$\\overline{E_{EF,P}}=%3.1f$"%EFFieldPoreMean, ha="center", va="center", bbox=bbox, fontsize=fsIns)
 
         else:
             connect = data.variables['connect1']
