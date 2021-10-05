@@ -19,8 +19,8 @@ This electrostatic model calculates the electric field distribution across the g
    * `cd ~/projects/pore_impact_on_ppgd/simulation_files/pore-scale/`
    * `../../../moose/test/moose_test-opt -i simulation_file_name.i`
    * example: `../../../moose/test/moose_test-opt -i laplace_water_ellipse_x_p01.i`
-5. To plot all figures, please consult the data_processing directory
-   * `cd ~/projects/pore_impact_on_ppgd/data_processing`
+5. To plot all figures, please find all python scripts in the following directory:
+   * `cd ~/projects/pore_impact_on_ppgd/python_scripts/`
 
 ### Project:
 This work is a part of the [Plasma Pulse Geo Drilling](https://geg.ethz.ch/project-plasma_drilling/) project, Geothermal Energy and Geofluids ([GEG.ethz.ch](https://geg.ethz.ch/)) group at ETH Zurich (ETHZ), Switzerland.
