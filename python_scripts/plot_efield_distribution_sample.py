@@ -188,22 +188,25 @@ axins2.annotate("", xy=(-0.004, -0.09), xycoords='axes fraction',  xytext=(1.005
 bbox=dict(fc="white", ec="none")
 axins2.text(4., 2.885, "$\mathrm{%2.0f~mm}$"%((x2-x1)*10), ha="center", va="center", bbox=bbox, fontsize=fs-4)
 
-# Weighting the mean:
-dxg = 0.01
-dyg = 0.01
-xg     = np.arange(x1+dxg, x2, dxg)
-yg     = np.arange(y1+dyg, y2, dyg)
-Xg,Yg = np.meshgrid(xg,yg)
 
 
-gix = np.vstack([Xg.ravel(), Yg.ravel()])[0]
-giy = np.vstack([Xg.ravel(), Yg.ravel()])[1]
 
+# Calculate the average enahncement factor at the near-electrode region
+dxg, dyg = 0.01, 0.01 # mesh size
+xg, yg   = np.arange(x1+dxg, x2, dxg), np.arange(y1+dyg, y2, dyg)
+Xg, Yg   = np.meshgrid(xg,yg)
+
+
+gix = np.vstack([Xg.ravel(), Yg.ravel()])[0] #the coordinates of the x nodes
+giy = np.vstack([Xg.ravel(), Yg.ravel()])[1] #the coordinates of the y nodes
+
+# Define the dxg * dyg boxes at centers gix, giy
 boxes = []
 for n in np.arange(len(gix)):
         boxes.append([gix[n]-dxg, gix[n]+dxg, giy[n]-dyg, giy[n]+dyg])
-
 boxes = np.array(boxes)
+
+# Mask the EField indefined values:
 dict_weight = {}
 for i in np.arange(len(X)):
       for n, coori in enumerate(boxes):
@@ -214,23 +217,26 @@ for i in np.arange(len(X)):
                         dict_weight.update({key: [EField[i]]})
                     dict_weight[key].append(EField[i])
 
+# Get the mean per box:
 mean_per_pexel = []
 for key in dict_weight:
     mean_per_pexel.append(np.mean(np.array(dict_weight.get(key))))
 
-
+# Get the mean in the near-electrode region.
 mean_per_pexel = np.mean(np.array(mean_per_pexel))
-print(mean_per_pexel)
+
+# Label the mean in the near-electrode region
+E_NE = ax1.indicate_inset_zoom(axins2, edgecolor="red")
+E_NELabel = "$\mathrm{\\overline{E_{EF,S,NE}}=%3.1f}$"%mean_per_pexel
 
 
-E_Tip=ax1.indicate_inset_zoom(axins2, edgecolor="red")
-E_TipLabel="$\mathrm{\\overline{E_{EF,S,E}}=%3.1f}$"%mean_per_pexel
+
 
 
 
 # Plot the damage path from Ezzat et al. 2021 (Energies)
-hr = 0.5    # the relative penetration depth for 50 mm electrode gap distance from Vazhov et al. 2010
-dE = 1      # [cm] the electrode gap distance
+hr = 0.2   # the relative penetration depth for 50 mm electrode gap distance from Vazhov et al. 2010
+dE = 5.5      # [cm] the electrode gap distance
 h  = dE * hr # [cm]the penetration depth
 R  = (h/2.0) + (dE**2/(8.0*h)) # The radius of the circle
 
@@ -241,8 +247,8 @@ XX  =  np.linspace(XStart,XStart+dE, 1000)
 YY  =  -np.sqrt(R**2 - (XX-dE/2-XStart)**2)+ R+Hs-h
 
 # Weighting the mean:
-dxg = 0.1
-dyg = 0.1
+dxg = 0.5
+dyg = 0.5
 xg     = np.arange(XStart+dxg, XStart+dE, dxg)
 yg     = np.arange(3-h+dyg, 3, dyg)
 Xg,Yg  = np.meshgrid(xg,yg)
@@ -276,13 +282,12 @@ mean_per_pexel = []
 for key in dict_weight:
     mean_per_pexel.append(np.mean(np.array(dict_weight.get(key))))
 
-mean_per_pexel = np.mean(np.array(mean_per_pexel))
-print(mean_per_pexel)
+mean_per_pexelIE = np.mean(np.array(mean_per_pexel))
 
-NE_Region=ax1.plot(XX, YY, '--', color="black")
-NE_RegionLabel = "$\mathrm{\\overline{E_{EF,S,NE}}=%3.1f}$"%mean_per_pexel
+E_IE = ax1.plot(XX, YY, '--', color="black")
+E_IELabel = "$\mathrm{\\overline{E_{EF,S,IE}}=%3.1f}$"%(mean_per_pexelIE)
 
-plt.legend((E_Tip[0], NE_Region[0]),[E_TipLabel, NE_RegionLabel],bbox_to_anchor=(-0.5,-0.65), loc="lower left", numpoints = 1, prop={"size":fs-4})
+plt.legend((E_NE[0], E_IE[0]),[E_NELabel, E_IELabel],bbox_to_anchor=(-0.5,-0.65), loc="lower left", numpoints = 1, prop={"size":fs-4})
 
 plt.tight_layout()
 
@@ -291,3 +296,54 @@ plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.png')
 plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.eps')
 
 plt.show()
+
+
+
+
+
+#
+#
+# # Calculate the average enahncement factor at the inter-electrode region
+# x1, x2, y1, y2 = 3.75, 9.25, 2.75, 3
+# dxg, dyg = 0.5, 0.05 # mesh size
+# xg, yg   = np.arange(x1+dxg, x2, dxg), np.arange(y1+dyg, y2, dyg)
+# Xg, Yg   = np.meshgrid(xg,yg)
+#
+#
+# gix = np.vstack([Xg.ravel(), Yg.ravel()])[0] #the coordinates of the x nodes
+# giy = np.vstack([Xg.ravel(), Yg.ravel()])[1] #the coordinates of the y nodes
+#
+# # Define the dxg * dyg boxes at centers gix, giy
+# boxes = []
+# for n in np.arange(len(gix)):
+#         boxes.append([gix[n]-dxg, gix[n]+dxg, giy[n]-dyg, giy[n]+dyg])
+# boxes = np.array(boxes)
+#
+# # Mask the EField indefined values:
+# dict_weight = {}
+# for i in np.arange(len(X)):
+#       for n, coori in enumerate(boxes):
+#             if X[i] >= coori[0] and X[i] <= coori[1] and Y[i] >= coori[2] and Y[i] <= coori[3]:
+#                 if EField[i] >=0.1: #To mask zeros and infinite values
+#                     key="%s"%n
+#                     if key not in dict_weight:
+#                         dict_weight.update({key: [EField[i]]})
+#                     dict_weight[key].append(EField[i])
+#
+# # Get the mean per box:
+# mean_per_pexel = []
+# for key in dict_weight:
+#     mean_per_pexel.append(np.mean(np.array(dict_weight.get(key))))
+#
+# # Get the mean in the near-electrode region.
+# mean_per_pexel = np.mean(np.array(mean_per_pexel))
+#
+# # Label the mean in the near-electrode region
+# E_Inter = ax1.indicate_inset_zoom(axins2, edgecolor="red")
+# E_InterLabel = "$\mathrm{\\overline{E_{EF,S,Int}}=%3.1f}$"%mean_per_pexel
+#
+# # Create a Rectangle patch
+# rect = Rectangle((x1, y1), x2-x1, y2-y1, linewidth=1, edgecolor='r', facecolor='none')
+#
+# # Add the patch to the Axes
+# plt.gca().add_patch(rect)

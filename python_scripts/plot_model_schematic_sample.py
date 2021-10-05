@@ -5,7 +5,7 @@ import matplotlib.gridspec as gridspec
 from matplotlib.patches import Rectangle
 
 gs  = gridspec.GridSpec(1,1)
-fig = plt.figure(figsize=(8,4))
+fig = plt.figure(figsize=(8,3.5))
 fs = 18
 plt.rcParams["mathtext.fontset"] = "cm"
 plt.rcParams["text.usetex"] =True
@@ -81,7 +81,7 @@ voltage  = voltage[1]  * 1e-3 #V to kV
 
 
 
-fsIns = fs
+fsIns = fs-4
 
 EField = np.sqrt(EField_x**2 + EField_y ** 2)
 
@@ -97,9 +97,16 @@ ax1.annotate("", xy=(-0.02, 0), xycoords='axes fraction',  xytext=(-0.02, 1),  a
 bbox=dict(fc="white", ec="none")
 ax1.text(-0.3, 1.5, "$H_S=\mathrm{3~cm}$", ha="center", va="center", bbox=bbox, fontsize=fsIns, rotation=90)
 
+#
+# ax1.annotate("", xy=(0.31, 1.1), xycoords='axes fraction',  xytext=(0.5, 1.1),  arrowprops=dict(arrowstyle='->'))
 
-ax1.annotate("", xy=(0.31, 0.97), xycoords='axes fraction',  xytext=(0.31, 1.7),  arrowprops=dict(arrowstyle='->'))
-ax1.annotate("", xy=(0.69, 0.97), xycoords='axes fraction',  xytext=(0.69, 1.7),  arrowprops=dict(arrowstyle='->'))
+ax1.add_patch(Rectangle((4,3), 5, 1, ls="-",  color="black", zorder=0, clip_on=False, fill=None))
+bbox=dict(fc="white", ec="black")
+ax1.text(6.5, 4, "$V_E=380~\\mathrm{kV}$", ha="center", va="center", bbox=bbox, fontsize=fsIns)
+
+ax1.annotate("", xy=(4/13, 1.1), xycoords='axes fraction',  xytext=(9/13, 1.1),  arrowprops=dict(arrowstyle='<->'))
+bbox=dict(fc="white", ec="none")
+ax1.text(6.5, 3.3, "$d_E=\\mathrm{5~cm}$", ha="center", va="center", bbox=bbox, fontsize=fsIns)
 
 
 #
@@ -107,7 +114,7 @@ ax1.annotate("", xy=(0.69, 0.97), xycoords='axes fraction',  xytext=(0.69, 1.7),
 # ax1.annotate("", xy=(GEP,0.98), xycoords='axes fraction',  xytext=(GEP,1.3),  arrowprops=dict(arrowstyle='-'))
 # ax1.annotate("", xy=(HVEP-0.001,1.285), xycoords='axes fraction',  xytext=(GEP+0.001,1.285),  arrowprops=dict(arrowstyle='-'))
 # ax1.annotate("", xy=(HVEP,1.11), xycoords='axes fraction',  xytext=(GEP,1.11),  arrowprops=dict(arrowstyle='<->'))
-
+#
 #
 #
 # ax1.text(6.5, 3.9, "$\mathrm{Pulse~Generator}~(V_E = \mathrm{380~kV})$", ha="center", va="center", bbox=bbox, fontsize=fsIns)
@@ -138,13 +145,13 @@ ax1.add_patch(Rectangle((6.5 - 0.1, 2.2 - 0.1), 0.2, 0.2, ls="-", lw=2, color="r
 ax1.add_patch(Rectangle((4 - 0.1, 2.8 - 0.1), 0.2, 0.2, ls="-", lw=2, color="red", zorder=3, fill=None))
 ax1.add_patch(Rectangle((5.5 - 0.1, 2.1 - 0.1), 0.2, 0.2, ls="-", lw=2, color="red", zorder=3, fill=None))
 
-ax1.add_patch(Rectangle((8.9 - 0.1, 2.8 - 0.1), 0.2, 0.2, ls="-", lw=2, color="red", zorder=3, fill=None))
+ax1.add_patch(Rectangle((9 - 0.1, 2.8 - 0.1), 0.2, 0.2, ls="-", lw=2, color="red", zorder=3, fill=None))
 ax1.add_patch(Rectangle((7.4 - 0.1, 2.1 - 0.1), 0.2, 0.2, ls="-", lw=2, color="red", zorder=3, fill=None))
 
 
-ax1.set_xticks([0,5,10,13])
-ax1.set_yticks([0,3])
-plt.yticks(rotation=90)
+# ax1.set_xticks([0,5,10,13])
+# ax1.set_yticks([0,3])
+# plt.yticks(rotation=90)
 
 # LM =
 # plt.subplots_adjust(bottom=0.1,top=0.7, left=0.05, right=0.95)
@@ -152,6 +159,7 @@ plt.yticks(rotation=90)
 
 ax1.set_xticklabels('')
 ax1.set_yticklabels('')
+
 plt.tight_layout()
 
 plt.savefig(WD+'pore_impact_on_ppgd/figures/model_schematic_sample.png')

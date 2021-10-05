@@ -105,7 +105,7 @@ E_EF_Av = 4.5 * 1.75 #The total of the average enhacement factors
 # 1.75 is the average of all pore shapes for air fluid
 # calculated from plot_efield_distribution_fluids-shapes.py
 
-numDS10 = 550.0/E_EF_Av
+numDS10 = 70.8 #From the critical E figures
 xmid10     = np.array([0,500/numDS10])
 ymid10     = np.array([0,500])
 ymid10 = ((ymid10[1]-ymid10[0])/(xmid10[1]-xmid10[0])) * xmid10
@@ -120,7 +120,7 @@ ax.text(5.3,400, '$d_P=10\\mathrm{\mu m}$', fontsize=fs-5, rotation=47)
 
 # The numerical dielectric strength calculated by our model
 # 130 kV/cm is the required electric field to induce electric breakdown in 50 um pore under 0.1 MPa pressure
-numDS50 = 130/E_EF_Av
+numDS50 = 16.5 #From the critical E figures
 xmid50     = np.array([0,500/numDS50])
 ymid50 = np.array([0,500])
 ymid50 = ((ymid50[1]-ymid50[0])/(xmid50[1]-xmid50[0])) * xmid50
@@ -135,7 +135,7 @@ ax.text(7,125, '$d_P=50\\mathrm{\mu m}$', fontsize=fs-5, rotation=14)
 
 # The numerical dielectric strength calculated by our model
 # 550 kV/cm is the required electric field to induce electric breakdown in 100 um pore under 0.1 MPa pressure
-numDS100 = 97/E_EF_Av
+numDS100 = 12.3 #From the critical E figures
 xmid100     = np.array([0,500/numDS100])
 ymid100 = np.array([0,500])
 ymid100 = ((ymid100[1]-ymid100[0])/(xmid100[1]-xmid100[0])) * xmid100
@@ -171,11 +171,13 @@ bbox_to_anchor=(1.04,0), loc="lower left", numpoints = 1, prop={"size":fs-8})
 
 
 
+# 11.1 for mximum  58
+# 12.9 for minmum  47
 
 # plt.legend(numpoints = 1, prop={"size":fs-6})
 plt.grid(color="gray")
 plt.tight_layout()
 plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.png')
-# plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
+plt.savefig(WD+'pore_impact_on_ppgd/figures/Granite_DielectricStrength_NumVsExpInoue1999.eps')
 
 plt.show()

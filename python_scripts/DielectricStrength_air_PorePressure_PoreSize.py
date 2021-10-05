@@ -12,7 +12,7 @@ WD    = os.path.expanduser('~/projects/')
 
 # Choose the x-axis variable, the pore pressure or the pore size
 variable = "pressure" # X-Axis
-# variable = "size"     # X-Axis
+variable = "size"     # X-Axis
 
 # Figure dimensions
 gs  = gridspec.GridSpec(1,1)
