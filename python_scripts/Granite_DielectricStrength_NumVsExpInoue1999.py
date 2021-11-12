@@ -24,7 +24,6 @@ WD    = os.path.expanduser('~/projects/')
 #      ('loosely dashdotdotted', (0, (3, 10, 1, 10, 1, 10))),
 #      ('densely dashdotdotted', (0, (3, 1, 1, 1, 1, 1)))]
 
-
 # Figure dimensions
 gs  = gridspec.GridSpec(1,1)
 fig = plt.figure(figsize=(12,6))

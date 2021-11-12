@@ -284,10 +284,16 @@ for key in dict_weight:
 
 mean_per_pexelIE = np.mean(np.array(mean_per_pexel))
 
-E_IE = ax1.plot(XX, YY, '--', color="black")
+E_IE = ax1.plot(XX, YY, '--', color="white")
 E_IELabel = "$\mathrm{\\overline{E_{EF,S,IE}}=%3.1f}$"%(mean_per_pexelIE)
 
-plt.legend((E_NE[0], E_IE[0]),[E_NELabel, E_IELabel],bbox_to_anchor=(-0.5,-0.65), loc="lower left", numpoints = 1, prop={"size":fs-4})
+plt.legend((E_NE[0], E_IE[0]),[E_NELabel, E_IELabel],bbox_to_anchor=(-0.5,-0.65),\
+ loc="lower left", numpoints = 1, prop={"size":fs-4}, facecolor='gray', framealpha=0.5)
+
+ax1.annotate("", xy=(7.8, 2.1), xytext=(8.4, 1.1),  arrowprops=dict(arrowstyle='->', color="white"))
+bbox=dict(fc="white", ec="white")
+ax1.text(8.5, 1, "$\\mathrm{Damage~path}$", ha="center", va="center", color='white', fontsize=fs)
+
 
 plt.tight_layout()
 
@@ -296,54 +302,3 @@ plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.png')
 plt.savefig(WD+'pore_impact_on_ppgd/figures/sample_efield.eps')
 
 plt.show()
-
-
-
-
-
-#
-#
-# # Calculate the average enahncement factor at the inter-electrode region
-# x1, x2, y1, y2 = 3.75, 9.25, 2.75, 3
-# dxg, dyg = 0.5, 0.05 # mesh size
-# xg, yg   = np.arange(x1+dxg, x2, dxg), np.arange(y1+dyg, y2, dyg)
-# Xg, Yg   = np.meshgrid(xg,yg)
-#
-#
-# gix = np.vstack([Xg.ravel(), Yg.ravel()])[0] #the coordinates of the x nodes
-# giy = np.vstack([Xg.ravel(), Yg.ravel()])[1] #the coordinates of the y nodes
-#
-# # Define the dxg * dyg boxes at centers gix, giy
-# boxes = []
-# for n in np.arange(len(gix)):
-#         boxes.append([gix[n]-dxg, gix[n]+dxg, giy[n]-dyg, giy[n]+dyg])
-# boxes = np.array(boxes)
-#
-# # Mask the EField indefined values:
-# dict_weight = {}
-# for i in np.arange(len(X)):
-#       for n, coori in enumerate(boxes):
-#             if X[i] >= coori[0] and X[i] <= coori[1] and Y[i] >= coori[2] and Y[i] <= coori[3]:
-#                 if EField[i] >=0.1: #To mask zeros and infinite values
-#                     key="%s"%n
-#                     if key not in dict_weight:
-#                         dict_weight.update({key: [EField[i]]})
-#                     dict_weight[key].append(EField[i])
-#
-# # Get the mean per box:
-# mean_per_pexel = []
-# for key in dict_weight:
-#     mean_per_pexel.append(np.mean(np.array(dict_weight.get(key))))
-#
-# # Get the mean in the near-electrode region.
-# mean_per_pexel = np.mean(np.array(mean_per_pexel))
-#
-# # Label the mean in the near-electrode region
-# E_Inter = ax1.indicate_inset_zoom(axins2, edgecolor="red")
-# E_InterLabel = "$\mathrm{\\overline{E_{EF,S,Int}}=%3.1f}$"%mean_per_pexel
-#
-# # Create a Rectangle patch
-# rect = Rectangle((x1, y1), x2-x1, y2-y1, linewidth=1, edgecolor='r', facecolor='none')
-#
-# # Add the patch to the Axes
-# plt.gca().add_patch(rect)
